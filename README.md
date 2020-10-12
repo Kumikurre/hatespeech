@@ -1,6 +1,12 @@
 # hatespeech
 NLP course project
 
+## Instructions to run
+### Task 1
+1. Load the CONAN dataset: http://hatespeechdata.com/
+2. Install the dependencies
+3. Run wcloud.py
+
 
 ## Task
 1. Consult the database of hate speech database maintained at http://hatespeechdata.com/ . Consider the dataset CONAN in the database, which has 1% abusive content among 1,288 posts. We would like to investigate the structure of the dataset in terms of categories present. Consider the subclass S1 of abusive content and subclass S2 of non-abusive content. Draw a wordcloud representation of S1 and S2.

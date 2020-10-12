@@ -1,0 +1,2 @@
+# hatespeech
+NLP course project

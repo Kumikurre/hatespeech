@@ -2,9 +2,8 @@ import json
 import nltk
 from nltk.corpus import stopwords
 
-from wordcloud import WordCloud, STOPWORDS 
+from wordcloud import WordCloud
 import matplotlib.pyplot as plt 
-import pandas as pd
 
 nltk.download('punkt')
 nltk.download('stopwords')

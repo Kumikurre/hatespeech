@@ -9,6 +9,7 @@ import pandas as pd
 nltk.download('punkt')
 nltk.download('stopwords')
 
+# set of stopwords (could be expanded)
 en_stops = set(stopwords.words('english') + stopwords.words('italian') + stopwords.words('french') + ['.', ','])
 
 f = open("CONAN.json", "r")
@@ -16,6 +17,7 @@ json_data = f.read()
 
 dataset = json.loads(json_data)
 
+# form a dict with the word as a key and its frequency as the value
 wordcount = {}
 for tweet in dataset["conan"]:
     hate_speech = tweet["hateSpeech"]
@@ -25,17 +27,15 @@ for tweet in dataset["conan"]:
         wordcount.setdefault(word, 0)
         wordcount[word] += 1
 
-print(wordcount)
-
-
-texts = []
+# wordcloud takes a string as input, so go over the dict and concatenate a string
+texts = ""
 counts = []
-
 for key, value in wordcount.items():
-    texts.append(key)
+    texts = texts + key + ' '
     counts.append(value)
 
-
-test1 = ColumnDataSource({'names':texts,'weights':counts})
-wordcloud = WordCloud2(source=test1,wordCol="names",sizeCol="weights",color=['pink','blue','green'])
-show(wordcloud)
+# form the wordcloud and print it out
+wordcloud = WordCloud().generate(texts)
+plt.imshow(wordcloud, interpolation='bilinear')
+plt.axis("off")
+plt.show()

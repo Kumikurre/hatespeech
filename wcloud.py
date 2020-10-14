@@ -61,3 +61,23 @@ plt.imshow(counter_wordcloud, interpolation='bilinear')
 plt.axis("off")
 plt.savefig("counterspeech.png")
 # plt.show()
+
+
+
+#### Task 2
+from empath import Empath
+lexicon = Empath()
+hate_analysis = lexicon.analyze(hate_texts)
+counter_analysis = lexicon.analyze(counter_texts)
+
+
+for key, value in list(hate_analysis.items()):
+    if value == 0.0:
+        hate_analysis.pop(key)
+for key, value in list(counter_analysis.items()):
+    if value == 0.0:
+        counter_analysis.pop(key)
+
+
+print(hate_analysis)
+print(counter_analysis)

@@ -1,6 +1,9 @@
 # Datasets
 CONAN.json
 
+# Artefacts
+counterspeech.png
+hatespeech.png
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

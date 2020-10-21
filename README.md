@@ -1,18 +1,18 @@
 # hatespeech
 NLP course project
 
-## Instructions to run
-### Task 1
+## Instructions for our implementation
+### Task 1-3 (Wordcloud, empath categorization and Harward general inquirer)
 1. Load the CONAN dataset: http://hatespeechdata.com/
 2. Install the dependencies
 3. Run wcloud.py
 
-### Task 2
+### Task 4-5 (Tensorflow neural network as a heuristic)
 1. Load the CONAN dataset: http://hatespeechdata.com/
 2. Install the dependencies
 3. Run heuristic.py
 
-## Task
+## Tasks
 1. Consult the database of hate speech database maintained at http://hatespeechdata.com/ . Consider the dataset CONAN in the database, which has 1% abusive content among 1,288 posts. We would like to investigate the structure of the dataset in terms of categories present. Consider the subclass S1 of abusive content and subclass S2 of non-abusive content. Draw a wordcloud representation of S1 and S2.
 2. Use Empath categorization and output for each message in S1 and S2, the list of categories who have non-zero weight. Report the result in a database that you will provide as a project deliverable. Conclude whether Empath categorization can be considered as a discriminative feature to recognize hate content from non-hate content.
 3. Repeat 2) by using Harvard General Inquirer available in http://www.wjh.harvard.edu/~inquirer/inquirerbasic.xls

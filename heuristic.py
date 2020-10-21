@@ -44,9 +44,9 @@ def get_inquiries(text):
 
 ### Task 4
 def teach(hate_tweets, counter_tweets):
-    print("Starting to teach")
     train_items = []
     train_labels = []
+    print("Parsing training data")
     for tweet in hate_tweets:
         categories = list(get_categories(tweet).values())
         scores = list(get_inquiries(tweet).values())
@@ -75,10 +75,34 @@ def teach(hate_tweets, counter_tweets):
               loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
               metrics=['accuracy'])
 
-    model.fit(train_items, train_labels, epochs=15)
+    print("Starting to teach")
+    model.fit(train_items, train_labels, epochs=10)
     return model
 
+def evaluate(model, hate_tweets, counter_tweets):
+    evaluate_items = []
+    evaluate_labels = []
+    print("Parsing evaluate data")
+    for tweet in hate_tweets:
+        categories = list(get_categories(tweet).values())
+        scores = list(get_inquiries(tweet).values())
+        categories_score_combined = [categories + scores]
+        evaluate_items.append(categories_score_combined)
+        # hatespeech is label 1
+        evaluate_labels.append(1)
 
+    for tweet in counter_tweets:
+        categories = list(get_categories(tweet).values())
+        scores = list(get_inquiries(tweet).values())
+        categories_score_combined = [categories + scores]
+        evaluate_items.append(categories_score_combined)
+        # counterspeech is label 0
+        evaluate_labels.append(0)
+
+    print("Evaluating the model")
+    test_loss, test_acc = model.evaluate(evaluate_items, evaluate_labels, verbose=2)
+
+    print('\nTest accuracy:', test_acc)
 
 if __name__ == '__main__':
     import sys

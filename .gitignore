@@ -4,6 +4,7 @@ CONAN.json
 # Artefacts
 counterspeech.png
 hatespeech.png
+heuristic
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

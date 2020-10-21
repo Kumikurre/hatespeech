@@ -3,11 +3,11 @@ NLP course project
 
 ## Instructions for our implementation
 ### Task 1-3 (Wordcloud, empath categorization and Harward general inquirer)
-1. Load the CONAN dataset: http://hatespeechdata.com/
-2. Install the dependencies
-3. Run wcloud.py
+1. Install dependencies (most should be in requirements.txt)
+2. Run the jupyter notebook `jupyter notebook hatespeech.ipynb`
+3. Open the notebook in your browser and run the cells in order
 
-### Task 4-5 (Tensorflow neural network as a heuristic)
+### Task 4-5 (Tensorflow neural network as a heuristic) (Not yet implemented: Move to notebook)
 1. Load the CONAN dataset: http://hatespeechdata.com/
 2. Install the dependencies
 3. Run heuristic.py

@@ -2,6 +2,7 @@ from empath import Empath
 import json
 import nltk
 import pysentiment2 as ps
+import pickle
 
 import tensorflow as tf
 
@@ -42,27 +43,49 @@ def get_inquiries(text):
     scores = hiv4.get_score(tokens)
     return scores
 
+def get_parsed(hate_tweets, counter_tweets):
+    try:
+        print("Loading data...")
+        with open ('train_items', 'rb') as fp:
+            train_items = pickle.load(fp)
+        with open ('train_labels', 'rb') as fp:
+            train_labels = pickle.load(fp)
+    except:
+        print("No existing data. Parsing training data")
+        train_items = []
+        train_labels = []
+        print("parsing hate tweets...")
+        for tweet in hate_tweets:
+            categories = list(get_categories(tweet).values())
+            scores = list(get_inquiries(tweet).values())
+            categories_score_combined = [categories + scores]
+            train_items.append(categories_score_combined)
+            # hatespeech is label 1
+            train_labels.append(1)
+
+        print("parsing counter tweets...")
+        for tweet in counter_tweets:
+            categories = list(get_categories(tweet).values())
+            scores = list(get_inquiries(tweet).values())
+            categories_score_combined = [categories + scores]
+            train_items.append(categories_score_combined)
+            # counterspeech is label 0
+            train_labels.append(0)
+
+        print("writing to file")
+        with open('train_items', 'wb') as fp:
+            pickle.dump(train_items, fp)
+
+        with open('train_labels', 'wb') as fp:
+            pickle.dump(train_labels, fp)
+    
+    return train_items, train_labels
+
 ### Task 4
 def teach(hate_tweets, counter_tweets):
-    train_items = []
-    train_labels = []
-    print("Parsing training data")
-    for tweet in hate_tweets:
-        categories = list(get_categories(tweet).values())
-        scores = list(get_inquiries(tweet).values())
-        categories_score_combined = [categories + scores]
-        train_items.append(categories_score_combined)
-        # hatespeech is label 1
-        train_labels.append(1)
 
-    for tweet in counter_tweets:
-        categories = list(get_categories(tweet).values())
-        scores = list(get_inquiries(tweet).values())
-        categories_score_combined = [categories + scores]
-        train_items.append(categories_score_combined)
-        # counterspeech is label 0
-        train_labels.append(0)
 
+    train_items, train_labels = get_parsed(hate_tweets, counter_tweets)
 
     model = tf.keras.Sequential([
         # each train_items item has 197 fields, so that is the number of neurons we need in the first layer of network

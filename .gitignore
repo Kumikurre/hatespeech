@@ -4,6 +4,8 @@ CONAN.json
 # Artefacts
 counterspeech.png
 hatespeech.png
+train_items
+train_labels
 heuristic
 
 # Byte-compiled / optimized / DLL files

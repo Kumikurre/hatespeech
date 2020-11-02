@@ -58,7 +58,7 @@ def get_parsed(hate_tweets, counter_tweets):
         for tweet in hate_tweets:
             categories = list(get_categories(tweet).values())
             scores = list(get_inquiries(tweet).values())
-            categories_score_combined = [categories + scores]
+            categories_score_combined = categories + scores
             train_items.append(categories_score_combined)
             # hatespeech is label 1
             train_labels.append(1)
@@ -67,7 +67,7 @@ def get_parsed(hate_tweets, counter_tweets):
         for tweet in counter_tweets:
             categories = list(get_categories(tweet).values())
             scores = list(get_inquiries(tweet).values())
-            categories_score_combined = [categories + scores]
+            categories_score_combined = categories + scores
             train_items.append(categories_score_combined)
             # counterspeech is label 0
             train_labels.append(0)
@@ -89,9 +89,10 @@ def teach(hate_tweets, counter_tweets):
 
     model = tf.keras.Sequential([
         # each train_items item has 197 fields, so that is the number of neurons we need in the first layer of network
-        tf.keras.layers.Dense(197, activation='relu'),
-        tf.keras.layers.Dense(25), # Not sure what to do with this layer. Do we even need it
-        tf.keras.layers.Dense(2)
+        tf.keras.layers.Input(198,),
+        tf.keras.layers.Dense(50, activation='relu'), # Not sure what to do with this layer. Do we even need it
+        tf.keras.layers.Dense(35),
+        tf.keras.layers.Dense(2, activation='sigmoid')
     ])
 
 
@@ -113,7 +114,7 @@ def evaluate(model, hate_tweets, counter_tweets):
     for tweet in hate_tweets:
         categories = list(get_categories(tweet).values())
         scores = list(get_inquiries(tweet).values())
-        categories_score_combined = [categories + scores]
+        categories_score_combined = categories + scores
         evaluate_items.append(categories_score_combined)
         # hatespeech is label 1
         evaluate_labels.append(1)
@@ -121,7 +122,7 @@ def evaluate(model, hate_tweets, counter_tweets):
     for tweet in counter_tweets:
         categories = list(get_categories(tweet).values())
         scores = list(get_inquiries(tweet).values())
-        categories_score_combined = [categories + scores]
+        categories_score_combined = categories + scores
         evaluate_items.append(categories_score_combined)
         # counterspeech is label 0
         evaluate_labels.append(0)

@@ -1,13 +1,19 @@
 import json
 import os
 from collections import defaultdict
+import pickle
 
 import nltk
 import requests
 
+import progressbar
 from nltk.corpus import stopwords
 from wordcloud import WordCloud
+from empath import Empath
+import pysentiment2 as ps
 
+lexicon = Empath()
+hiv4 = ps.HIV4()
 
 def download(url, filename=None):
     """Downloads file from the selected url and stores to file
@@ -56,3 +62,35 @@ def count_words(texts, stops=None):
         for word in words:
             word_count[word] += 1
     return word_count
+
+
+def _get_categories(text):
+    categories = lexicon.analyze(text, normalize=True)
+    return categories
+
+def _get_inquiries(text):
+    tokens = hiv4.tokenize(text)
+    scores = hiv4.get_score(tokens)
+    return scores
+
+def get_nn_input(hate_tweets, counter_tweets):
+    print("Parsing the hate and counter tweets into inputs for the neural network.")
+    train_items = []
+    train_labels = []
+    for tweet in progressbar.progressbar(hate_tweets):
+        categories = list(_get_categories(tweet).values())
+        scores = list(_get_inquiries(tweet).values())
+        categories_score_combined = categories + scores
+        train_items.append(categories_score_combined)
+        # hatespeech is label 1
+        train_labels.append(1)
+
+    for tweet in progressbar.progressbar(counter_tweets):
+        categories = list(_get_categories(tweet).values())
+        scores = list(_get_inquiries(tweet).values())
+        categories_score_combined = categories + scores
+        train_items.append(categories_score_combined)
+        # counterspeech is label 0
+        train_labels.append(0)
+    
+    return train_items, train_labels

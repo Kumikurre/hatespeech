@@ -58,13 +58,13 @@ def task1(hate_texts, counter_texts):
     wordcloud = WordCloud().generate(hate_texts)
     plt.imshow(wordcloud, interpolation='bilinear')
     plt.axis("off")
-    plt.savefig("hatespeech.png")
+    plt.savefig("artefacts/hatespeech.png")
     # plt.show()
 
     counter_wordcloud = WordCloud().generate(counter_texts)
     plt.imshow(counter_wordcloud, interpolation='bilinear')
     plt.axis("off")
-    plt.savefig("counterspeech.png")
+    plt.savefig("artefacts/counterspeech.png")
     # plt.show()
 
 

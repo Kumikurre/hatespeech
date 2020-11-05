@@ -7,10 +7,8 @@ NLP course project
 2. Run the jupyter notebook `jupyter notebook hatespeech.ipynb`
 3. Open the notebook in your browser and run the cells in order
 
-### Task 4-5 (Tensorflow neural network as a heuristic) (Not yet implemented: Move to notebook)
-1. Load the CONAN dataset: http://hatespeechdata.com/
-2. Install the dependencies
-3. Run heuristic.py
+### Task 4-5 (Tensorflow neural network as a heuristic) 
+4. Continue running the notebook from tasks 1-3
 
 ## Tasks
 1. Consult the database of hate speech database maintained at http://hatespeechdata.com/ . Consider the dataset CONAN in the database, which has 1% abusive content among 1,288 posts. We would like to investigate the structure of the dataset in terms of categories present. Consider the subclass S1 of abusive content and subclass S2 of non-abusive content. Draw a wordcloud representation of S1 and S2.

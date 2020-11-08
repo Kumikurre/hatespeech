@@ -94,3 +94,17 @@ def get_nn_input(hate_tweets, counter_tweets):
         train_labels.append(0)
     
     return train_items, train_labels
+
+
+def preprocess_7(hate_texts, counter_texts):
+    dict_id = 0
+    output_dict = {}
+    for item in hate_texts:
+        output_dict[str(dict_id)] = ["hate", item, ""]
+        dict_id = dict_id + 1
+    for item in counter_texts:
+        output_dict[str(dict_id)] = ["counter", item, ""]
+        dict_id = dict_id + 1
+
+    pickle.dump(output_dict, open("./comparative-abusive-lang/data/crawled_data.pkl", "wb"))
+    return output_dict

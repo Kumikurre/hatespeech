@@ -10,6 +10,16 @@ NLP course project
 ### Task 4-5 (Tensorflow neural network as a heuristic) 
 4. Continue running the notebook from tasks 1-3
 
+### Task 6
+5. to be done
+
+### Task 7
+6. Clone the repository: https://github.com/younggns/comparative-abusive-lang
+7. Change line 24 from data_preprocess.py from `return re.sub(pattern, repl, text, flags=FLAGS)` to `return re.sub(str(pattern), repl, str(text), flags=FLAGS)`
+8. run data_preprocess.py
+9. run train_ml_models.py --clf NB
+10. input values are 1,3 and 1200 when they are asked
+
 ## Tasks
 1. Consult the database of hate speech database maintained at http://hatespeechdata.com/ . Consider the dataset CONAN in the database, which has 1% abusive content among 1,288 posts. We would like to investigate the structure of the dataset in terms of categories present. Consider the subclass S1 of abusive content and subclass S2 of non-abusive content. Draw a wordcloud representation of S1 and S2.
 2. Use Empath categorization and output for each message in S1 and S2, the list of categories who have non-zero weight. Report the result in a database that you will provide as a project deliverable. Conclude whether Empath categorization can be considered as a discriminative feature to recognize hate content from non-hate content.
